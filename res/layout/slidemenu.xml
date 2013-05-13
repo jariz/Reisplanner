@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/slide_background_pattern"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/list_padding"
+    android:paddingRight="@dimen/list_padding" >
+
+    <TextView
+        android:id="@+id/TextView01"
+        style="@style/Reisplanner.sectionHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="STATIONS" />
+
+    <ListView
+        android:id="@+id/stations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/Reisplanner.sectionHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NIEUWS" />
+
+    <ListView
+        android:id="@+id/nieuws"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/TextView02"
+        style="@style/Reisplanner.sectionHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="APPLICATIE" />
+
+    <ListView
+        android:id="@+id/applicatie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>
