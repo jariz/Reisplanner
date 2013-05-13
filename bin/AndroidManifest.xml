@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="pro.jariz.reisplanner"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Reisplanner" >
+        <activity
+            android:name="BasePlannerActivity"
+            android:label="@string/title_activity_planner" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="pro.jariz.reisplanner.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="pro.jariz.reisplanner.fragments.Planner" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pro.jariz.reisplanner.Planner" />
+        </activity>
+    </application>
+
+</manifest>
