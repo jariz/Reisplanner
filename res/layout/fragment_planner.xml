@@ -1,0 +1,146 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Planner">
+
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical" >
+	
+	    <LinearLayout
+	        android:id="@+id/header"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+	
+	        <com.devspark.robototextview.widget.RobotoTextView
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_horizontal"
+	            android:paddingBottom="0dp"
+	            android:paddingTop="10dp"
+	            android:text="Reisplanner"
+	            android:textSize="31sp"
+	            app:typeface="roboto_thin" />
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:id="@+id/form"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginTop="10dp"
+	        android:orientation="vertical" >
+	
+	        <com.devspark.robototextview.widget.RobotoTextView
+	            android:id="@+id/RobotoTextView01"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:paddingLeft="10dp"
+	            android:text="Locatie"
+	            android:textColor="@android:color/darker_gray"
+	            android:textSize="20dp"
+	            app:typeface="roboto_thin_italic" />
+	
+	        <AutoCompleteTextView
+	            android:id="@+id/AutoCompleteTextView1"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="5dp"
+	            android:ems="10"
+	            android:hint="Van"
+	            android:maxLines="1" />
+	
+	        <AutoCompleteTextView
+	            android:id="@+id/AutoCompleteTextView2"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="5dp"
+	            android:ems="10"
+	            android:hint="Via"
+	            android:maxLines="1" />
+	
+	        <AutoCompleteTextView
+	            android:id="@+id/AutoCompleteTextView3"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:ems="10"
+	            android:hint="Naar"
+	            android:maxLines="1" />
+
+	        <CheckBox
+	            android:id="@+id/extraOptions"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Laad extra opties zien" />
+	
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:id="@+id/time"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginTop="10dp"
+	        android:orientation="vertical"
+	        android:visibility="gone" >
+	
+	        <com.devspark.robototextview.widget.RobotoTextView
+	            android:id="@+id/RobotoTextView02"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:paddingLeft="10dp"
+	            android:text="Tijd"
+	            android:textColor="@android:color/darker_gray"
+	            android:textSize="20dp"
+	            app:typeface="roboto_thin_italic" />
+	
+	        <TimePicker
+	            android:id="@+id/timePicker1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" />
+	
+	    </LinearLayout>
+
+	    <LinearLayout
+	        android:id="@+id/date"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginTop="10dp"
+	        android:orientation="vertical"
+	        android:visibility="gone" >
+
+	        <com.devspark.robototextview.widget.RobotoTextView
+	            android:id="@+id/RobotoTextView03"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:paddingLeft="10dp"
+	            android:text="Datum"
+	            android:textColor="@android:color/darker_gray"
+	            android:textSize="20dp"
+	            app:typeface="roboto_thin_italic" />
+
+	        <DatePicker
+	            android:id="@+id/datePicker1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" />
+
+	    </LinearLayout>
+	
+	    <com.fima.cardsui.views.CardUI
+	        android:id="@+id/cardsview"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	
+	    </com.fima.cardsui.views.CardUI>
+	
+	</LinearLayout>
+</ScrollView>
