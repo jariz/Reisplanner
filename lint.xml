@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<lint>
-    <issue id="ResourceAsColor">
-        <ignore path="src\pro\jariz\reisplanner\Planner.java" />
-        <ignore path="src\pro\jariz\reisplanner\fragments\PlannerFragment.java" />
-    </issue>
-</lint>
