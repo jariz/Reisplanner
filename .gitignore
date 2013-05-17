@@ -24,3 +24,18 @@ local.properties
 
 # PDT-specific
 .buildpath
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Android studio (?)
+out/**
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
