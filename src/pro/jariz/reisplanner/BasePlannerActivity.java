@@ -14,6 +14,7 @@ import android.widget.ListView;
 import pro.jariz.reisplanner.adapters.*;
 import pro.jariz.reisplanner.api.NSTaskInvokable;
 import pro.jariz.reisplanner.fragments.*;
+import pro.jariz.reisplanner.misc.DB;
 
 public class BasePlannerActivity extends SlidingFragmentActivity {
 
@@ -23,7 +24,10 @@ public class BasePlannerActivity extends SlidingFragmentActivity {
 		
 		//custom animation
 		overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-		
+
+        //load database
+        DB.Init(this);
+
 		//set default activity layout
 		setContentView(R.layout.activity_base);
 		
@@ -41,6 +45,14 @@ public class BasePlannerActivity extends SlidingFragmentActivity {
 		//custom animation
 		overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 	}
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //custom animation
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
 	
 	void switchTo(NSTaskInvokable fragment) {
 		try

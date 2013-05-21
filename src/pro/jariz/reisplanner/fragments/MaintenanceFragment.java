@@ -11,6 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import pro.jariz.reisplanner.R;
 import pro.jariz.reisplanner.api.*;
+import pro.jariz.reisplanner.api.objects.NSStation;
+import pro.jariz.reisplanner.api.objects.NSStoring;
+import pro.jariz.reisplanner.cards.DisruptionCard;
+
+import java.util.Arrays;
 
 public class MaintenanceFragment extends NSTaskInvokable {
 	
@@ -32,6 +37,8 @@ public class MaintenanceFragment extends NSTaskInvokable {
 		} else {
 			context.getSupportActionBar().setTitle("Werkzaamheden");
 			title.setTitle("Werkzaamheden");
+
+            new NSTask(this).execute(NSTask.TYPE_STORINGEN);
 		}
 		title.setTitleTypeFace(Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-CondensedItalic.ttf"));
 		mCardView.addStack(title);
@@ -39,4 +46,16 @@ public class MaintenanceFragment extends NSTaskInvokable {
 		
 		return thisView;
 	}
+
+    @Override
+    public void Invoke(Object Result, Integer TaskType) {
+        Object[] objects = (Object[])Result;
+        NSStoring[] storings = Arrays.copyOf(objects, objects.length, NSStoring[].class);
+        CardUI mCardView = (CardUI) thisView.findViewById(R.id.maintenance);
+        for(int i=0;i < storings.length; i++) {
+            DisruptionCard card = new DisruptionCard(storings[i]);
+            mCardView.addCard(card);
+        }
+        mCardView.refresh();
+    }
 }

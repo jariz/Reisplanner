@@ -1,7 +1,9 @@
 package pro.jariz.reisplanner.api.objects;
 
+import java.io.Serializable;
+
 public class NSStation {
-	
+
 	public NSStation() {
 		
 	}
