@@ -40,4 +40,13 @@ Remarks: *Included within project, Unmodified*
 License: *Apache 2.0*
 - [Roboto Font](http://developer.android.com/design/style/typography.html)  
 Remarks: *Included within project, as an asset*  
-License: *Apache 2.0*
+License: *Apache 2.0*  
+  
+#Icons
+- ['Train'](http://thenounproject.com/noun/train/#icon-No67) (project launcher icon)  
+Part of the AIGA non-copyrighted iconset designed in 1974  
+More information [here](http://www.aiga.org/symbol-signs/)  
+Licensed under: [Public Domain](http://creativecommons.org/publicdomain/mark/1.0/)
+- ['Smile'](http://thenounproject.com/noun/smile/#icon-No3360) ('No disruptions found' icon)  
+Created by Rob Schill, from The Noun Project   
+Licensed under: [Creative Commons - Attribution (CC BY 3.0)](http://thenounproject.com/noun/smile/#icon-No3360)
