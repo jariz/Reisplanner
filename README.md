@@ -48,5 +48,5 @@ Part of the AIGA non-copyrighted iconset designed in 1974
 More information [here](http://www.aiga.org/symbol-signs/)  
 Licensed under: [Public Domain](http://creativecommons.org/publicdomain/mark/1.0/)
 - ['Smile'](http://thenounproject.com/noun/smile/#icon-No3360) ('No disruptions found' icon)  
-Created by Rob Schill, from The Noun Project   
-Licensed under: [Creative Commons - Attribution (CC BY 3.0)](http://thenounproject.com/noun/smile/#icon-No3360)
+Created by [Rob Schill](http://thenounproject.com/schillidog/), from [The Noun Project](http://thenounproject.com)  
+Licensed under: [Creative Commons - Attribution (CC BY 3.0)](http://creativecommons.org/licenses/by/3.0/)
