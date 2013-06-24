@@ -24,6 +24,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import pro.jariz.reisplanner.R;
+import pro.jariz.reisplanner.api.NSTaskInvokable;
 
 /**
  * The implementation of the fragment to display content. Based on {@link android.support.v4.app.ListFragment}.
@@ -31,7 +32,7 @@ import pro.jariz.reisplanner.R;
  *
  * @author Evgeny Shishkin
  */
-public class ProgressSherlockFragment extends SherlockFragment {
+public class ProgressSherlockFragment extends NSTaskInvokable {
 
     private View mProgressContainer;
     private View mContentContainer;

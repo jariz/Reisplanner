@@ -77,7 +77,7 @@
 	            android:id="@+id/extraOptions"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="Laad extra opties zien" />
+	            android:text="Laat extra opties zien" />
 	
 	    </LinearLayout>
 	

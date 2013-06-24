@@ -45,7 +45,7 @@
 		<item name="android:textColor">#FFF</item>
 	</style>
 	
-    <style name="ActionBar.Solid.Reisplanner" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
+    <style name="ActionBar.Solid.Reisplanner" parent="@style/Widget.Sherlock.ActionBar.Solid">
     	<item name="titleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Title.Reisplanner</item>
         <item name="background">@drawable/ab_solid_reisplanner</item>
         <item name="backgroundStacked">@drawable/ab_stacked_solid_reisplanner</item>

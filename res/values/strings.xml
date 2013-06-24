@@ -7,5 +7,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="updating_station_list">De stationslijst word bijgewerkt....</string>
     <string name="updating_station_list_done">De stationslijst is succesvol bijgewerkt!</string>
+    <string name="enter_both_fields">Vul de \'van\' en \'naar\' velden in!</string>
 
 </resources>

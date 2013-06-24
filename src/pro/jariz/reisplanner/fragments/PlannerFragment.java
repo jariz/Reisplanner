@@ -17,14 +17,23 @@
 package pro.jariz.reisplanner.fragments;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
+import android.content.Intent;
+import android.support.v4.app.NavUtils;
+import android.widget.*;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.fima.cardsui.objects.CardStack;
 import com.fima.cardsui.views.*;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import pro.jariz.reisplanner.R;
+import pro.jariz.reisplanner.SelectActivity;
 import pro.jariz.reisplanner.api.*;
 import pro.jariz.reisplanner.api.objects.*;
 import pro.jariz.reisplanner.cards.StationCard;
@@ -37,12 +46,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.LinearLayout;
 import de.keyboardsurfer.android.widget.crouton.*;
 import pro.jariz.reisplanner.misc.CroutonStyles;
 import pro.jariz.reisplanner.misc.DB;
@@ -74,6 +78,66 @@ public class PlannerFragment extends NSTaskInvokable {
 
         Render(stations, thisView, this.getActivity());
 	}
+
+    public boolean isSafe() { //is it safe to build a bundle out of the views?
+        AutoCompleteTextView auto = (AutoCompleteTextView)thisView.findViewById(R.id.AutoCompleteTextView1);
+        AutoCompleteTextView auto3 = (AutoCompleteTextView)thisView.findViewById(R.id.AutoCompleteTextView3);
+
+        if(auto.getText().length() > 0 && auto3.getText().length() > 0) return true; else return false;
+    }
+
+    public Bundle BuildBundle() { //create bundle from views to pass to select activity
+        Bundle bundle = new Bundle();
+        AutoCompleteTextView auto = (AutoCompleteTextView)thisView.findViewById(R.id.AutoCompleteTextView1);
+        AutoCompleteTextView auto2 = (AutoCompleteTextView)thisView.findViewById(R.id.AutoCompleteTextView2);
+        AutoCompleteTextView auto3 = (AutoCompleteTextView)thisView.findViewById(R.id.AutoCompleteTextView3);
+        CheckBox check = (CheckBox)thisView.findViewById(R.id.extraOptions);
+        DatePicker picker = (DatePicker)thisView.findViewById(R.id.datePicker1);
+        TimePicker time = (TimePicker)thisView.findViewById(R.id.timePicker1);
+
+        bundle.putString("from", auto.getText().toString());
+        bundle.putString("via", auto2.getText().toString());
+        bundle.putString("to", auto3.getText().toString());
+
+        if(check.isChecked()) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            bundle.putString("date", format.format(new Date(picker.getYear(), picker.getMonth(), picker.getDayOfMonth(), time.getCurrentHour(), time.getCurrentMinute(), 0)));
+        }
+
+        return bundle;
+    }
+
+    @Override
+    public void onSlideMenu() {
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+        switch (item.getItemId()) {/*
+            case android.R.id.home:
+                //home button clicked? toggle slidemenu
+                ((SlidingFragmentActivity)this.getActivity()).toggle();
+                return true;*/
+            case R.id.plan:
+                Intent select = new Intent(this.getActivity(), SelectActivity.class);
+                if(isSafe()) {
+                    select.putExtras(BuildBundle());
+                    startActivity(select);
+                    return true;
+                } else {
+                    Crouton.showText(getActivity(), getResources().getString(R.string.enter_both_fields), CroutonStyles.errorStyle);
+                    return false;
+                }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu (Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.planner, menu);
+    }
 	
 	View thisView;
 	
@@ -83,6 +147,11 @@ public class PlannerFragment extends NSTaskInvokable {
 		thisView = inflater.inflate(R.layout.fragment_planner, container, false);
 		
 		final SlidingFragmentActivity context = (SlidingFragmentActivity)this.getActivity();
+
+        //make sure we've got some actionbar buttons
+        setHasOptionsMenu(true);
+
+        //context.getSupportMenuInflater().
 		
 		CheckBox extra = (CheckBox)thisView.findViewById(R.id.extraOptions);
 		extra.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -94,16 +163,16 @@ public class PlannerFragment extends NSTaskInvokable {
 				if(isChecked) {
 					time.setVisibility(View.VISIBLE);
 					date.setVisibility(View.VISIBLE);
-					Animation anim = AnimationUtils.loadAnimation(context, R.anim.push_right_in);
+					Animation anim = AnimationUtils.loadAnimation(context, R.anim.fadein);
 					time.startAnimation(anim);
 					date.startAnimation(anim);
 				} else {
 					time.setVisibility(View.GONE);
 					date.setVisibility(View.GONE);
-					Animation anim = AnimationUtils.loadAnimation(context, R.anim.push_right_out);
+					//Animation anim = AnimationUtils.loadAnimation(context, R.anim.fadeout);
 					
-					time.startAnimation(anim);
-					date.startAnimation(anim);
+					//time.startAnimation(anim);
+					//date.startAnimation(anim);
 				}
 			} });
 	
@@ -136,6 +205,7 @@ public class PlannerFragment extends NSTaskInvokable {
 		AutoCompleteTextView auto = (AutoCompleteTextView)x.findViewById(R.id.AutoCompleteTextView1);
 		AutoCompleteTextView auto2 = (AutoCompleteTextView)x.findViewById(R.id.AutoCompleteTextView2);
 		AutoCompleteTextView auto3 = (AutoCompleteTextView)x.findViewById(R.id.AutoCompleteTextView3);
+
 		ArrayList<String> fullnames = new ArrayList<String>();
 		CardUI mCardView = (CardUI) x.findViewById(R.id.cardsview);
 		mCardView.setSwipeable(true);

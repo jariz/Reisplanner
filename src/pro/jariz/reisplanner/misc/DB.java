@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import pro.jariz.reisplanner.api.objects.NSNamen;
 import pro.jariz.reisplanner.api.objects.NSStation;
 
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class DB {
                 station.Code = results.getString(1);
                 station.Type = results.getString(2);
                 station.Land = results.getString(3);
+                station.Namen = new NSNamen();
                 station.Namen.Kort = results.getString(4);
                 station.Namen.Middel = results.getString(5);
                 station.Namen.Lang = results.getString(6);

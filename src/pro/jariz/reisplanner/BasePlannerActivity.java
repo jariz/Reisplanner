@@ -16,7 +16,11 @@
 
 package pro.jariz.reisplanner;
 
-import com.actionbarsherlock.view.MenuItem;
+import android.content.Context;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -112,7 +116,18 @@ public class BasePlannerActivity extends SlidingFragmentActivity {
 		final ListView applicatie = (ListView)findViewById(R.id.applicatie);
 		applicatie.setAdapter(new SlideMenuAdapter(this, new String[] { "Instellingen", "Over" }));
 		
-		//set up events handlers
+		//set up event handlers
+
+        SlidingMenu.OnOpenListener openListener = new SlidingMenu.OnOpenListener() {
+            @Override
+            public void onOpen() {
+                //hide keyboard if slidemenu is showing (looks ugly if it does)
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (inputMethodManager != null && inputMethodManager.isAcceptingText()) {
+                    inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }
+        };
 		
 		OnItemClickListener clickevent = new OnItemClickListener() {
 
@@ -120,7 +135,7 @@ public class BasePlannerActivity extends SlidingFragmentActivity {
 			public void onItemClick(AdapterView<?> list, View parent, int index,
 					long arg3) {
 				String name = (String)list.getAdapter().getItem(index);
-				
+
 				toggle();
 				
 				if(name.equals("Reisplanner")) {
@@ -141,21 +156,23 @@ public class BasePlannerActivity extends SlidingFragmentActivity {
 				
 			} 
 		};
-		
+
+        getSlidingMenu().setOnOpenListener(openListener);
+
 		applicatie.setOnItemClickListener(clickevent);
 		nieuws.setOnItemClickListener(clickevent);
 		stations.setOnItemClickListener(clickevent);
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			//home button clicked? toggle slidemenu
-			toggle();
-			return true;
-		default:
-			return false;
+            case android.R.id.home:
+                //home button clicked? toggle slidemenu
+                toggle();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
 		}
 	}
 

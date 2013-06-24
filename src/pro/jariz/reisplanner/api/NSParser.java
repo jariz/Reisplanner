@@ -19,7 +19,13 @@ package pro.jariz.reisplanner.api;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.KXml2Driver;
+import com.thoughtworks.xstream.io.xml.Xpp3DomDriver;
+import com.thoughtworks.xstream.io.xml.Xpp3Driver;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -35,7 +41,7 @@ public class NSParser {
 	
 	public static NSStation[] ParseStations(String input) {
 		Log.i("NSAPI", "NSParser has started parsing a station list...");
-		
+
 		//set up parser
     	XmlPullParser parser = Xml.newPullParser();
     	StringReader reader = new StringReader(input);
@@ -44,6 +50,7 @@ public class NSParser {
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 			//parser.nextTag();
 		} catch (Exception e) {
+            NSTask.LastExceptionMessage = e.getMessage();
 			NSAPI.Error(e);
 		}
 		
@@ -72,6 +79,8 @@ public class NSParser {
 			        	
 			        	//namen start tag
 			        	parser.nextTag();
+
+                        station.Namen = new NSNamen();
 			        	
 			        	station.Namen.Kort = readTagText(parser, "Kort");
 			        	parser.nextTag();
@@ -120,6 +129,7 @@ public class NSParser {
 			return stationlist.toArray(stationz);
     	}
     	catch(Exception z) {
+            NSTask.LastExceptionMessage = z.getMessage();
     		NSAPI.Error(z);
     		return null;
     	}
@@ -148,9 +158,8 @@ public class NSParser {
             NSStoring[] xxx = new NSStoring[storings.size()];
             Log.i("NSAPI", "NSParser has successfully parsed "+storings.size()+" disruptions!");
             return storings.toArray(xxx);
-
-
         } catch(Exception z) {
+            NSTask.LastExceptionMessage = z.getMessage();
             NSAPI.Error(z);
             return null;
         }
@@ -230,9 +239,34 @@ public class NSParser {
 	        }
 	        parser.require(XmlPullParser.END_TAG, null, name);
     	} catch(Exception z) {
-    		NSAPI.Error(z);
+            NSTask.LastExceptionMessage =z.getMessage();
+            NSAPI.Error(z);
     	}
         return result;
     }
-	
+
+    public static ArrayList<NSAdvice> ParseAdvice(String req) {
+        try
+        {
+            //use xstream because i'm not gonna write an entire parser for the massive amount of tags reisadvies provides.
+
+            XStream stream = new XStream(new Xpp3Driver());
+            stream.alias("ReisMogelijkheden", NSAdvice[].class);
+            stream.alias("ReisMogelijkheid", NSAdvice.class);
+            stream.alias("ReisDeel", NSReisdeel.class);
+            stream.alias("ReisStop", NSReisStop.class);
+            stream.alias("Melding", NSMelding.class);
+            stream.alias("Naam", String.class);
+            stream.alias("Tijd", Date.class);
+            stream.alias("Spoor", Integer.class);
+            stream.registerConverter(new NSDateConverter());
+            return new ArrayList<NSAdvice>(Arrays.asList((NSAdvice[])stream.fromXML(req)));
+        }
+        catch(Exception z) {
+            NSTask.LastExceptionMessage = z.getMessage();
+            NSAPI.Error(z);
+        }
+
+        return null;
+    }
 }

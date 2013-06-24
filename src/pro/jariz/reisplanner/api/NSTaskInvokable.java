@@ -16,11 +16,17 @@
 
 package pro.jariz.reisplanner.api;
 
-import android.support.v4.app.Fragment;
+import android.util.Log;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.devspark.progressfragment.ProgressSherlockFragment;
 
-public abstract class NSTaskInvokable extends Fragment {
+public abstract class NSTaskInvokable extends SherlockFragment {
 	public void Invoke(Object Result, Integer TaskType) {
-		
+		Log.i("NSAPI", "Tried to invoke a fragment that hasn't overidden Invoke");
 	}
+
+    public void onSlideMenu() {
+
+    }
 
 }

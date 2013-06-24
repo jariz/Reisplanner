@@ -34,7 +34,8 @@ import android.util.Xml;
 import android.util.Base64;
 
 class NSAPI {
-	public static String[] Stations = { };
+    //dump all xml requests to console
+    public static boolean DumpXML = true;
 	
 	public static void Error(Exception e) {
 		Log.e("NSAPI", e.toString());
